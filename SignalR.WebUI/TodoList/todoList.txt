@@ -1,0 +1,4 @@
+--CategoryCount
+--ProductCount
+--aktif kategori sayýsý
+--pasif kategori sayýsý

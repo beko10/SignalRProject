@@ -1,0 +1,48 @@
+﻿@model UpdateDiscountDto
+@{
+    ViewData["Title"] = "UpdateDiscount";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">İndirim Bilgisi Ekleme</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <input asp-for="DiscountID" type="hidden"/>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Yeni İndirimli Ürün Bilgisi Giriş</div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="form-group">
+                                <label for="DiscountTitle">Ürün  Başlık Giriniz</label>
+                                <input asp-for="Title" type="text" class="form-control" id="DiscountTitle" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="DiscountDescription">Ürün Açıklama Giriniz</label>
+                                <input asp-for="Description" type="text" class="form-control" id="DiscountDescription" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="DiscountAmount">Ürün İndirim Oranı  Giriniz</label>
+                                <input asp-for="Amount" type="text" class="form-control" id="DiscountAmount" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="DiscountImageUrl">Üürn Resmi  Giriniz</label>
+                                <input asp-for="ImageUrl" type="text" class="form-control" id="DiscountImageUrl" />
+                            </div>
+
+                            <div class="card-action">
+                                <button class="btn btn-success">İndirimli Ürünü Güncelle</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+﻿@model CreateFeatureDto
+@{
+    ViewData["Title"] = "CreateFeature";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Öne Çıkan Üürün Bilgisi Ekleme</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Yeni Öne Çıkan Ürün  Bilgisi Giriş</div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="form-group">
+                                <label for="DiscountTitle1">1.Başlık Giriniz</label>
+                                <input asp-for="Title1" type="text" class="form-control" id="DiscountTitle1" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="DiscountTitle2">2.Başlık Giriniz</label>
+                                <input asp-for="Title2" type="text" class="form-control" id="DiscountTitle2" />
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="DiscountTitle3">3.Başlık Giriniz</label>
+                                <input asp-for="Title3" type="text" class="form-control" id="DiscountTitle3" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="DiscountDescription1">1. Açıklamayı Giriniz</label>
+                                <input asp-for="Description1" type="text" class="form-control" id="DiscountDescription1" />
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="DiscountDescription2">2. Açıklamayı Giriniz</label>
+                                <input asp-for="Description2" type="text" class="form-control" id="DiscountDescription2" />
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="DiscountDescription3">3. Açıklamayı Giriniz</label>
+                                <input asp-for="Description3" type="text" class="form-control" id="DiscountDescription3" />
+                            </div>
+
+                            <div class="card-action">
+                                <button class="btn btn-success">Öne Çıkan Alanı  Ekle</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
