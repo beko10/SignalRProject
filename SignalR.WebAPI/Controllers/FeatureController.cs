@@ -31,7 +31,7 @@ namespace SignalR.WebAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateContact(CreateFeatureDto createFeatureDto)
+        public IActionResult CreateContact(GetFeatureDto createFeatureDto)
         {
             var createdFeature = _mapper.Map<Feature>(createFeatureDto);
             _featureService.Add(createdFeature);

@@ -80,5 +80,31 @@ namespace SignalR.WebAPI.Controllers
             var result = _productService.ProductCountByCategoryName(categoryName);
             return Ok(result);
         }
+        [HttpGet("ProductPriceAvg")]
+        public IActionResult ProductPriceAvg()
+        {
+            var productsPriceAvg = _productService.ProductPriceAvg();
+            return Ok(productsPriceAvg);
+        }
+        [HttpGet("ProductNameByMaxPrice")]
+        public IActionResult ProductNameByMaxPrice()
+        {
+            var productNameByMaxPrice =  _productService.ProducNameByMaxPrice();
+            return Ok(productNameByMaxPrice);   
+        }
+
+        [HttpGet("ProductNameByMinPrice")]
+        public IActionResult ProductNameByMinPrice()
+        {
+            var productNameByMinPrice =  _productService.ProducNameByMaxPrice();
+            return Ok(productNameByMinPrice);
+        }
+
+        [HttpGet("ProductPriceAvgByHamburger")]
+        public IActionResult ProductPriceAvgByHamburger()
+        {
+            var productAvgByHamburgerPrice = _productService.ProductPriceAvgByHamburger();
+            return Ok(productAvgByHamburgerPrice);
+        }
     }
 }

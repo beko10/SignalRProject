@@ -13,6 +13,10 @@ namespace SignalR.BusinessLayer.Abstract
         List<ResultProductWithCategoryDto> GetProductWithCategory();
         int GetProductCount();
         int ProductCountByCategoryName(string categoryName);
+        decimal ProductPriceAvg();
+        string ProducNameByMaxPrice();
+        string ProducNameByMinPrice();
+        decimal ProductPriceAvgByHamburger();
 
     }
 }

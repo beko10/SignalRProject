@@ -15,5 +15,12 @@ namespace SignalR.DataAccessLayer.Abstract
         int GetProductCount();
 
         int ProductCountByCategoryName(Expression<Func<Product, bool>> filter);
+
+        decimal ProductPriceAvg();
+
+        string ProducNameByMaxPrice();
+        string ProducNameByMinPrice();
+        decimal ProductPriceAvgByHamburger();
     }
+
 }

@@ -8,10 +8,10 @@ namespace SignalR.WebAPI.Mapping
     {
         public FeatureMapping()
         {
-              CreateMap<Feature,ResultFeatureDto>().ReverseMap();
-              CreateMap<Feature,GetFeatureDto>().ReverseMap();
-              CreateMap<Feature,UpdateFeatureDto>().ReverseMap();
-              CreateMap<Feature,CreateFeatureDto>().ReverseMap();
+              CreateMap<Feature,ResultOrderDto>().ReverseMap();
+              CreateMap<Feature,GetOrderDto>().ReverseMap();
+              CreateMap<Feature,UpdateOrderDto>().ReverseMap();
+              CreateMap<Feature,CreateOrderDto>().ReverseMap();
         }
     }
 }

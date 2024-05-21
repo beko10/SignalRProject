@@ -2,3 +2,16 @@
 --ProductCount
 --aktif kategori sayýsý
 --pasif kategori sayýsý
+
+--Ortalama Fiyat 
+--En düþük Ürünlü fiyat 
+--En yüksek ürünlü fiyat 
+--Ortalama hamburger sayýsý
+
+--toplam sipariþ sayýsý
+--aktif sipariþ sayýsý
+--son sipariþ tutarý 
+--kasadaki tutar
+--bugünkü kazanç 
+--ortalama sipariþ tutarý 
+--masa sayýsý

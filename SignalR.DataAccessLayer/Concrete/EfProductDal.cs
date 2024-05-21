@@ -45,11 +45,60 @@ namespace SignalR.DataAccessLayer.Concrete
             return result.ToList();
         }
 
+        public string ProducNameByMaxPrice()
+        {
+            using (var context = new SignalRContex())
+            {
+                return context.Products
+                    .Where(x => x.Price == (context.Products.Max(y => y.Price)))
+                    .Select(x => x.ProductName)
+                    .FirstOrDefault();
+                   
+            }
+            /*
+             using (var context = new AppDbContext())
+            {
+                var cheapestProduct = context.Products
+                .OrderBy(p => p.Price)
+                .FirstOrDefault();
+            }
+             
+             */
+        }
+
+        public string ProducNameByMinPrice()
+        {
+            using (var context = new SignalRContex())
+            {
+                return context.Products
+                    .OrderByDescending(x => x.Price)
+                    .Select(x => x.ProductName)
+                    .FirstOrDefault();
+            }
+        }
+
         public int ProductCountByCategoryName(Expression<Func<Product, bool>> filter)
         {
             using (var context = new SignalRContex())
             {
                 return context.Products.Where(filter).Count();
+            }
+        }
+
+        public decimal ProductPriceAvg()
+        {
+            using (var context = new SignalRContex())
+            {
+                return context.Products.Average(x=>x.Price);    
+            }
+        }
+
+        public decimal ProductPriceAvgByHamburger()
+        {
+            using (var context = new SignalRContex())
+            {
+                return context.Products
+                    .Where(x => x.CategoryId == (context.Categories.Where(y => y.CategoryName == "Hamburger").Select(z => z.CategoryID).FirstOrDefault())).Average(w=>w.Price);
             }
         }
     }
