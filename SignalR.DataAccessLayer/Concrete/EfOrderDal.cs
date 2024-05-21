@@ -20,7 +20,15 @@ namespace SignalR.DataAccessLayer.Concrete
         {
             using (var context = new SignalRContex())
             {
-                return context.Orders.OrderByDescending(X => X.OrderId).Select(x => x.TotalPrice).FirstOrDefault();
+                return context.Orders.OrderByDescending(X => X.OrderId).Take(1).Select(y=>y.TotalPrice).FirstOrDefault();
+            }
+        }
+
+        public decimal TodayTotalPrice()
+        {
+            using (var context = new SignalRContex())
+            {
+                return context.Orders.Where(x=>x.Date == DateTime.Today).Sum(y => y.TotalPrice);
             }
         }
 

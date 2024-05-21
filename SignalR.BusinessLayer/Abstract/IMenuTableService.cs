@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace SignalR.BusinessLayer.Abstract
 {
-    public interface IOrderService:IGenericService<Order>
+    public interface IMenuTableService:IGenericService<MenuTable>
     {
-        int TotalOrderCount();
-        decimal LastOrderPrice();
-        decimal TodayTotalPrice();
+        int MenuTableCount();
     }
 }

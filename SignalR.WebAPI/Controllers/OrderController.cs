@@ -52,5 +52,25 @@ namespace SignalR.WebAPI.Controllers
             return Ok(updatedOrder);
         }
 
+        [HttpGet("TotalOrderCount")]
+        public IActionResult TotalOrderCount()
+        {
+            var totalOrderCount = _orderService.TotalOrderCount();
+            return Ok(totalOrderCount);
+        }
+
+        [HttpGet("LastOrderPrice")]
+        public IActionResult LastOrderPrice()
+        {
+            var totalOrderCount = _orderService.LastOrderPrice();
+            return Ok(totalOrderCount);
+        }
+
+        [HttpGet("TodayTotalPrice")]
+        public IActionResult TodayTotalPrice()
+        {
+            return Ok(_orderService.TodayTotalPrice()); 
+        }
+
     }
 }

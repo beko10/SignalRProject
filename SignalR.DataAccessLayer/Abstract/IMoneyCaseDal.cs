@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace SignalR.DataAccessLayer.Abstract
 {
-    public interface IOrderDal:IEntityRepository<Order>
+    public interface IMoneyCaseDal:IEntityRepository<MoneyCase>
     {
-        int TotalOrderCount();
-        decimal LastOrderPrice();
-        decimal TodayTotalPrice();
+        decimal TotalMoneyCaseAmount();
     }
 }
