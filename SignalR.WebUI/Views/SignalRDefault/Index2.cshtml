@@ -15,16 +15,20 @@
             <div class="col-md-12">
                 <div class="card">
                     <script type="text/javascript">
-
                         $(document).ready(() => {
-
+                            // SignalR hub bağlantısını oluşturur ve başlatır
                             var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:44331/SignalRHub").build();
+
+                            // Bağlantı durumunu günceller
                             $("#connstatus").text(connection.state);
 
+                            // Bağlantıyı başlatır
                             connection.start().then(() => {
                                 $("#connstatus").text(connection.state);
+
+                                // Her 1000 milisaniyede bir "SendCategoryCount" metodunu çağırır
                                 setInterval(() => {
-                                    connection.invoke("SendCategorySound").catch(err => console.error(err));
+                                    connection.invoke("SendCategoryCount").catch(err => console.error(err));
                                 }, 1000);
 
                             }).catch((err) => {
@@ -32,11 +36,13 @@
                                 $("#connstatus").text("Connection failed");
                             });
 
-                            connection.on("RecieveCategoryCount", (value) => {
+                            // "ReceiveCategoryCount" olayını dinler ve gelen değeri günceller
+                            connection.on("ReceiveCategoryCount", (value) => {
                                 $("#categorycount").text(value);
                             });
                         });
                     </script>
+
                 </div>
             </div>
         </div>

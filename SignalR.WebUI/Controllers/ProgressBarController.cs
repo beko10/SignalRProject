@@ -2,7 +2,7 @@
 
 namespace SignalR.WebUI.Controllers
 {
-    public class StaticticController : Controller
+    public class ProgressBarController : Controller
     {
         public IActionResult Index()
         {
