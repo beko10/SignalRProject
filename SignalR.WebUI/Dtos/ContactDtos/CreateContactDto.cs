@@ -14,5 +14,8 @@ namespace SignalR.WebUI.Dtos.ContactDto
         public string Mail { get; set; }
         public string FooterTitle { get; set; }
         public string FooterDescription { get; set; }
+        public string OpdenDays { get; set; }
+        public string OpdenDaysDescription { get; set; }
+        public string OpdenHours { get; set; }
     }
 }

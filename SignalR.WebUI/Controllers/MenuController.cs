@@ -1,20 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SignalR.WebUI.Dtos.ProductDtos;
-using SignalR.WebUI.Dtos.SliderDtos;
 
-namespace SignalR.WebUI.ViewComponents.DefaultComponents
+namespace SignalR.WebUI.Controllers
 {
-    public class _DefaultOurMenuComponentPartial:ViewComponent
+    public class MenuController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public _DefaultOurMenuComponentPartial(IHttpClientFactory httpClientFactory)
+        public MenuController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:44331/api/Product");
