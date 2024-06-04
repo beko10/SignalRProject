@@ -23,7 +23,7 @@ namespace SignalR.WebAPI.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public IActionResult GetBasketByMenuTableId(int id)
         {
             var values = _basketService.GetBasketByTableNumber(id); 
@@ -35,15 +35,17 @@ namespace SignalR.WebAPI.Controllers
             //revize edilecek 
             using (var context = new SignalRContex())
             {
-                var values = context.Baskets.Include(x=>x.Product).Where(y=>y.MenuTableId == id).Select(z=>new ResultBasketListWithProduct
+     
+
+                var values = context.Baskets.Include(x => x.Product).Where(y => y.MenuTableID == id).Select(z => new ResultBasketListWithProduct
                 {
-                    BasketId = z.BasketId,
-                    MenuTableId = z.MenuTableId,
-                    Count = z.Count,    
+                    BasketId = z.BasketID,
+                    MenuTableId = z.MenuTableID,
+                    Count = z.Count,
                     Price = z.Price,
-                    ProductId = z.ProductId,
+                    ProductId = z.ProductID,
                     ProductName = z.Product.ProductName,
-                    TotalPrice = z.TotalPrice   
+                    TotalPrice = z.TotalPrice
                 }).ToList();
                 return Ok(values);  
             }
@@ -51,9 +53,31 @@ namespace SignalR.WebAPI.Controllers
         [HttpPost]
         public IActionResult AddToBasket(CreateBasketDto createBasketDto)
         {
-            var addedProductToBasket = _mapper.Map<Basket>(createBasketDto);
-            
-            return Ok(_basketService.AddProductToBasket(addedProductToBasket.ProductId,addedProductToBasket.Count));
+
+
+            var value =  _basketService.AddProductToBasket(createBasketDto.ProductId,createBasketDto.Count);
+
+            return Ok(value);
+            //revize edilecek
+            //using (var context = new SignalRContex())
+            //{
+            //    _basketService.Add(new Basket()
+            //    {
+            //        ProductID = createBasketDto.ProductId,
+            //        Count = 1,
+            //        MenuTableID = 1,
+            //        Price = context.Products.Where(x => x.ProductID == createBasketDto.ProductId).Select(y => y.Price).FirstOrDefault(),
+            //        TotalPrice = 0
+            //    });
+            //    return Ok();
+            //}
+        }
+        [HttpDelete("{id}")]
+        public IActionResult DeleteBasket(int id)
+        {
+            var deletedBasket = _basketService.GetById(id);
+            _basketService.Delete(deletedBasket);   
+            return Ok(deletedBasket);
         }
     }
 }

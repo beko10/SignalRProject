@@ -38,7 +38,7 @@ namespace SignalR.BusinessLayer.Concrete
 
         public Basket GetById(int id)
         {
-            throw new NotImplementedException();
+            return _basketDal.GetById(id);
         }
 
         public void Update(Basket entity)
@@ -51,10 +51,12 @@ namespace SignalR.BusinessLayer.Concrete
             return _basketDal.GetBasketByTableNumber(id);
         }
 
-        public Basket  AddProductToBasket(int productId, decimal count)
+      
+
+        public Basket AddProductToBasket(int productId, int count)
         {
             var addedProductToBasket = _productDal.GetById(productId);
-            if(addedProductToBasket == null)
+            if (addedProductToBasket == null)
             {
                 throw new Exception("Product Not Found");
             }
@@ -63,15 +65,14 @@ namespace SignalR.BusinessLayer.Concrete
             {
                 Count = count,
                 Price = addedProductToBasket.Price,
-                ProductId = addedProductToBasket.ProductId,
+                ProductID = addedProductToBasket.ProductID,
                 TotalPrice = addedProductToBasket.Price * count,
-
+                MenuTableID = 1
             };
 
             _basketDal.Add(Basket);
 
             return Basket;
-
         }
     }
 }

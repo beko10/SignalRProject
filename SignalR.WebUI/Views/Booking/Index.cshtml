@@ -1,64 +1,133 @@
 ﻿@model List<ResultBookingDto>
 @{
-	ViewData["Title"] = "Index";
-	Layout = "~/Views/AdminLayout/Index.cshtml";
-	int count = 0;
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
 }
 
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
 <div class="content">
-	<div class="container-fluid">
-		<h4 class="page-title">Rezervasyon İşlemleri</h4>
-		<div class="row">
-			<div class="col-md-">
-				<div class="card">
-					<div class="card-header">
-						<div class="card-title">Rezervasyon Listesi</div>
-					</div>
-					<div class="card-body">
-						<div class="card-sub">
-							Rezervasyon ile ilgili aşağıdan gerçekleştirebilirsiniz
-						</div>
-						<table class="table mt-3">
-							<thead>
-								<tr>
-									<th scope="col">Rezervasyon Listesi</th>
-									<th scope="col">İd</th>
-									<th scope="col">Ad Soyad</th>
-									<th scope="col">Rezervasyon Açıklama</th>
-									<th scope="col">Telefon</th>
-									<th scope="col">Mail</th>
-									<th scope="col">Kişi Sayısı</th>
-									<th scope="col">Rezervasyon Durumu</th>
-									<th scope="col">Tarih</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach (var item in Model)
-								{
-									count++;
-									<tr>
-										<td>@count</td>
-										<td>@item.BookingID</td>
-										<td>@item.Name</td>
-										<td>@item.Description</td>
-										<td>@item.Phone</td>
-										<td>@item.Mail</td>
-										<td>@item.PersonCount</td>
-										<td>@item.Date</td>
-										<td><a asp-controller="Booking" asp-action="DeleteBooking" asp-route-id="@item.BookingID" class="btn btn-outline-danger">Sil</a></td>
-										<td><a asp-controller="Booking" asp-action="UpdateBooking" asp-route-id="@item.BookingID" class="btn btn-outline-success">Güncelle</a></td>
-									</tr>
-								}
-							</tbody>
-						</table>
-						<a asp-controller="Booking" asp-action="CreateBooking" class="btn btn-outline-primary">Yeni Rezervasyon Girişi</a>
-					</div>
-				</div>
+    <div class="container-fluid">
+        <script type="text/javascript">
+            $(document).ready(() => {
+                // SignalR hub bağlantısını oluşturur ve başlatır
+                var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:44331/SignalRHub").build();
 
-			</div>
+                // Bağlantı durumunu günceller
+                $("#connstatus").text(connection.state);
 
+                // Bağlantıyı başlatır
+                connection.start().then(() => {
+                    $("#connstatus").text(connection.state);
 
-		</div>
-	</div>
+                    // Her 5000 milisaniyede bir metotları çağırır
+                    setInterval(() => {
+                        connection.invoke("GetBookingList").catch(err => console.error(err));
+                    }, 5000);
+                }).catch((err) => {
+                    console.log(err);
+                    $("#connstatus").text("Connection failed");
+                });
+
+                // "ReceiveBookingList" olayını dinler ve gelen değeri günceller
+                connection.on("ReceiveBookingList", (value) => {
+                    console.log(value);
+                    // $("#bookingList").empty();
+                    // value.forEach((item, index) => {
+                    //     $("#bookingList").append(`<li class="list-group-item">${item.name}</li>`);
+                    // });
+                    let tablehtml = `<table class="table mt-3">
+                    <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">İd</th>
+                                    <th scope="col">Ad Soyad</th>
+                                    <th scope="col">Rezervasyon Açıklama</th>
+                                    <th scope="col">Telefon</th>
+                                    <th scope="col">Mail</th>
+                                    <th scope="col">Kişi Sayısı</th>
+                                    <th scope="col">Rezervasyon Durumu</th>
+                                    <th scope="col">Tarih</th>
+                                </tr>
+                    </thead>
+                    <tbody>
+                    `
+                    $.each(value, (index, item) => {
+                        tablehtml+=`
+                                     <tr>
+                                                    <td>${item.bookingid}</td>
+                                                    <td>${item.name}</td>
+                                                    <td>${item.phone}</td>
+                                                    <td>${item.personcount}</td>
+                                                    <td>${"Rezervasyon Alındı"}</td>
+                                                     <td><a href="/Booking/Delete/${item.BookingId" class="btn btn-outline-danger">Sil</a></td>
+                            < td > <a href="/Booking/Delete/${item.BookingId" class="btn btn-outline-danger" > Sil < /a></td >
+                                                </tr>
+                        
+                        
+                        
+                        `
+                    })
+                });
+            });
+        </script>
+
+        <h4 class="page-title">Rezervasyon İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Rezervasyon Listesi</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-sub">
+                            Rezervasyon ile ilgili işlemleri aşağıdan gerçekleştirebilirsiniz
+                        </div>
+                        <table class="table mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">İd</th>
+                                    <th scope="col">Ad Soyad</th>
+                                    <th scope="col">Rezervasyon Açıklama</th>
+                                    <th scope="col">Telefon</th>
+                                    <th scope="col">Mail</th>
+                                    <th scope="col">Kişi Sayısı</th>
+                                    <th scope="col">Rezervasyon Durumu</th>
+                                    <th scope="col">Tarih</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    count++;
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>@item.BookingID</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.Description</td>
+                                        <td>@item.Phone</td>
+                                        <td>@item.Mail</td>
+                                        <td>@item.PersonCount</td>
+                                        <td>@item.Date</td>
+                                        <td><a asp-controller="Booking" asp-action="DeleteBooking" asp-route-id="@item.BookingID" class="btn btn-outline-danger">Sil</a></td>
+                                        <td><a asp-controller="Booking" asp-action="UpdateBooking" asp-route-id="@item.BookingID" class="btn btn-outline-success">Güncelle</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <a asp-controller="Booking" asp-action="CreateBooking" class="btn btn-outline-primary">Yeni Rezervasyon Girişi</a>
+                        <div class="col-md-8">
+                            <ul class="list-group" id="bookingList">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-

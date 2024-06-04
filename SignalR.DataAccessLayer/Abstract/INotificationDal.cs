@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace SignalR.DataAccessLayer.Abstract
 {
-    public interface IBasketDal:IEntityRepository<Basket>
+    public interface INotificationDal:IEntityRepository<Notification>
     {
-        List<Basket> GetBasketByTableNumber(int id);
-        Basket AddBasketToProduct(int id,int count);   
+        int NotificationCountByStatusFalse();
+        List<Notification> GetAllNatificationByFalse();
     }
 }

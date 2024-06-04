@@ -30,13 +30,13 @@ namespace SignalR.DataAccessLayer.Concrete
         {
             var context = new SignalRContex();
             var result = from p in context.Products
-                         join c in context.Categories on p.CategoryId equals c.CategoryID
+                         join c in context.Categories on p.CategoryID equals c.CategoryID
                          where p.ProductStatus == true
                          select new ResultProductWithCategoryDto
                          {
-                             ProductId = p.ProductId,
+                             ProductId = p.ProductID,
                              ProductName = p.ProductName,
-                             Descripion = p.Descripion,
+                             Descripion = p.Description,
                              Price = p.Price,
                              ImageUrl = p.ImageUrl,
                              ProductStatus = p.ProductStatus,
@@ -98,7 +98,7 @@ namespace SignalR.DataAccessLayer.Concrete
             using (var context = new SignalRContex())
             {
                 return context.Products
-                    .Where(x => x.CategoryId == (context.Categories.Where(y => y.CategoryName == "Hamburger").Select(z => z.CategoryID).FirstOrDefault())).Average(w=>w.Price);
+                    .Where(x => x.CategoryID == (context.Categories.Where(y => y.CategoryName == "Hamburger").Select(z => z.CategoryID).FirstOrDefault())).Average(w=>w.Price);
             }
         }
     }

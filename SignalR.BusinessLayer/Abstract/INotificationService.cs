@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace SignalR.BusinessLayer.Abstract
 {
-    public interface IBasketService:IGenericService<Basket>
+    public interface INotificationService:IGenericService<Notification>
     {
-        public List<Basket> GetBasketByTableNumber(int id);
-        public Basket AddProductToBasket(int productId,int count);
-
-    }
+        int NotificationCountByStatusFalse();
+		List<Notification> GetAllNatificationByFalse();
+	}
 }

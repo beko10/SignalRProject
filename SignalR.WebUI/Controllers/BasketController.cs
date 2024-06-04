@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SignalR.WebUI.Dtos.BasketDtos;
-
+using System.Text;
 namespace SignalR.WebUI.Controllers
 {
     public class BasketController : Controller
@@ -25,18 +25,15 @@ namespace SignalR.WebUI.Controllers
             }
             return View();
         }
-        //[HttpPost]
-        //public async Task<IActionResult> AddBasket()
-        //{
-        //    var client = _httpClientFactory.CreateClient();
-        //    var jsonData = JsonConvert.SerializeObject(createAboutDto);
-        //    StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-        //    var responseMessage = await client.PostAsync("https://localhost:44331/api/Basket", content);
-        //    if (responseMessage.IsSuccessStatusCode)
-        //    {
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View();
-        //}
+       public async Task<IActionResult> DeleteBasketToProduct(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.DeleteAsync($"https://localhost:44331/api/Basket/{id}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return NoContent();
+        }
     }
 }

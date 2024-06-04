@@ -10,7 +10,7 @@
 
 @await Component.InvokeAsync("_UILayoutHeadComponentPartial")
 
-<body class="">
+<body class="sub_page">
 
     @await Component.InvokeAsync("_MenuNavBarComponentPartial")
 
@@ -138,13 +138,18 @@
             var id = value;
             $.ajax({
                 type: 'post',
+                url : '/Menu/AddBasket/' + id,
                 data: { item: id },
                 contentType: 'json',
-                success:function(){
+                success: function () {
                     alert("ürün id" + id);
                 }
             });
+
         }
+
+        
+
     </script>
 
 </body>
