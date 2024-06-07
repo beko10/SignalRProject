@@ -36,42 +36,41 @@
                 // "ReceiveBookingList" olayını dinler ve gelen değeri günceller
                 connection.on("ReceiveBookingList", (value) => {
                     console.log(value);
-                    // $("#bookingList").empty();
-                    // value.forEach((item, index) => {
-                    //     $("#bookingList").append(`<li class="list-group-item">${item.name}</li>`);
-                    // });
-                    let tablehtml = `<table class="table mt-3">
-                    <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">İd</th>
-                                    <th scope="col">Ad Soyad</th>
-                                    <th scope="col">Rezervasyon Açıklama</th>
-                                    <th scope="col">Telefon</th>
-                                    <th scope="col">Mail</th>
-                                    <th scope="col">Kişi Sayısı</th>
-                                    <th scope="col">Rezervasyon Durumu</th>
-                                    <th scope="col">Tarih</th>
-                                </tr>
-                    </thead>
-                    <tbody>
-                    `
+                    let tablehtml = `
+                                            <table class="table mt-3">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">İd</th>
+                                                    <th scope="col">Ad Soyad</th>
+                                                    <th scope="col">Rezervasyon Açıklama</th>
+                                                    <th scope="col">Telefon</th>
+                                                    <th scope="col">Mail</th>
+                                                    <th scope="col">Kişi Sayısı</th>
+                                                    <th scope="col">Rezervasyon Durumu</th>
+                                                    <th scope="col">Tarih</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>`;
+
                     $.each(value, (index, item) => {
-                        tablehtml+=`
-                                     <tr>
+                        tablehtml += `
+                                                <tr>
+                                                    <td>${index + 1}</td>
                                                     <td>${item.bookingid}</td>
                                                     <td>${item.name}</td>
                                                     <td>${item.phone}</td>
+                                                    <td>${item.phone}</td>
+                                                    <td>${item.mail}</td>
                                                     <td>${item.personcount}</td>
                                                     <td>${"Rezervasyon Alındı"}</td>
-                                                     <td><a href="/Booking/Delete/${item.BookingId" class="btn btn-outline-danger">Sil</a></td>
-                            < td > <a href="/Booking/Delete/${item.BookingId" class="btn btn-outline-danger" > Sil < /a></td >
-                                                </tr>
-                        
-                        
-                        
-                        `
-                    })
+                                                    <td>${item.date}</td>
+                                                    <td><a href="/Booking/Delete/${item.BookingId}" class="btn btn-outline-danger">Sil</a></td>
+                                                </tr>`;
+                    });
+
+                    tablehtml += `</tbody></table>`;
+                    $("#bookingList").html(tablehtml);
                 });
             });
         </script>

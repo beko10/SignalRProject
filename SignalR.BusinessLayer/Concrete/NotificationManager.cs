@@ -52,5 +52,10 @@ namespace SignalR.BusinessLayer.Concrete
 		{
 			return _notificationDal.GetAllNatificationByFalse();
 		}
-	}
+
+        public void NotificationStatusChangeToTrue(int id)
+        {
+           _notificationDal.NotificationStatusChangeToTrue(id);
+        }
+    }
 }

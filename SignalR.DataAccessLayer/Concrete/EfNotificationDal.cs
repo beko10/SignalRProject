@@ -23,7 +23,18 @@ namespace SignalR.DataAccessLayer.Concrete
             }
 		}
 
-		public int NotificationCountByStatusFalse()
+        public void NotificationStatusChangeToTrue(int id)
+        {
+            using (var context = new SignalRContex())
+            {
+                var notificationSearch = context.Notifications.Find(id);
+                notificationSearch.Status = true;
+                context.SaveChanges();
+
+            }
+        }
+
+        public int NotificationCountByStatusFalse()
         {
             using (var context = new SignalRContex())
             {
