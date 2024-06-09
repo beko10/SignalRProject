@@ -14,6 +14,7 @@ namespace SignalR.WebAPI.Hubs
         private readonly IMenuTableService _menuTableService;
         private readonly IBookingService _bookingService;
         private readonly INotificationService _notificationService;
+        private readonly IMenuTableService menuTableService;
 
         // Konstrüktör: Bağımlılık enjeksiyonu kullanılarak servisleri alır.
         public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService, IMoneyCaseService moneyCaseService, IMenuTableService menuTableService, IBookingService bookingService, INotificationService notificationService)
@@ -90,6 +91,12 @@ namespace SignalR.WebAPI.Hubs
 
             var notificcationList = _notificationService.GetAllNatificationByFalse();
             await Clients.All.SendAsync("ReceiveNotificationListByFalse", notificcationList);
+        }
+
+        public async Task SendMenuTable()
+        {
+            var menuTableList = _menuTableService.GetAll();
+            await Clients.All.SendAsync("ReceiveMenuTableList", menuTableList);
         }
     }
 }

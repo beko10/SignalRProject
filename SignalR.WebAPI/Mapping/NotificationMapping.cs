@@ -8,9 +8,9 @@ namespace SignalR.WebAPI.Mapping
 	{
         public NotificationMapping()
         {
-            CreateMap<UpdateNotificationDto,Notification>().ReverseMap();
-            CreateMap<ResultNotificationDto,Notification>().ReverseMap();
-            CreateMap<CreateNotificationDto,Notification>().ReverseMap();
+            CreateMap<Notification, UpdateNotificationDto>().ReverseMap();
+            CreateMap<Notification,ResultNotificationDto>().ReverseMap();
+            CreateMap<Notification,CreateNotificationDto>().ReverseMap();
         }
     }
 }

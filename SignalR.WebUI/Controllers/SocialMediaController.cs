@@ -93,5 +93,6 @@ namespace SignalR.WebUI.Controllers
             }
             return View();
         }
+        
     }
 }
