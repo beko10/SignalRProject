@@ -31,6 +31,7 @@ namespace SignalR.WebAPI.Controllers
         [HttpPost]
         public IActionResult CreateContact(CreateDiscountDto createDiscountDto)
         {
+            createDiscountDto.Status = false;
             var createdDiscount = _mapper.Map<Discount>(createDiscountDto);
             _discountService.Add(createdDiscount);
             return Ok(createdDiscount);
@@ -58,5 +59,17 @@ namespace SignalR.WebAPI.Controllers
             var discount = _discountService.GetById(id);
             return Ok(discount);
         }
-    }
+        [HttpGet("ChangeStatusToTrue/{id}")]
+        public IActionResult ChangeStatusToTrue(int id)
+        {
+            _discountService.ChangeStatusToTrue(id);    
+            return Ok();
+        }
+		[HttpGet("ChangeStatusToFalse/{id}")]
+		public IActionResult ChangeStatusToFalse(int id)
+		{
+			_discountService.ChangeStatusToFalse(id);
+			return Ok();
+		}
+	}
 }

@@ -56,5 +56,17 @@ namespace SignalR.WebAPI.Controllers
         {
             return Ok(_bookingService.GetById(id));
         }
+        [HttpGet("BookingStatusApproved/{id}")]
+        public IActionResult BookingStatusApproved(int id)
+        {
+            _bookingService.BookingStatusApproved(id);
+            return Ok();
+        }
+        [HttpGet("BookingStatusCancelled/{id}")]
+        public IActionResult BookingStatusCancelled(int id)
+        {
+            _bookingService.BookingStatusCancelled(id);
+            return Ok();
+        }
     }
 }

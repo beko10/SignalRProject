@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.SignalR;  // SignalR ile ilgili sınıfları ve arayüzleri içerir.
-using SignalR.BusinessLayer.Abstract;  // İş katmanındaki soyut sınıfları içerir.
+using SignalR.BusinessLayer.Abstract;
 
 namespace SignalR.WebAPI.Hubs
 {
     // SignalRHub sınıfı, SignalR hub'ını temsil eder.
     public class SignalRHub : Hub
     {
+
+        public static int ClientCount = 0;
+
         // Özel alanlar: Kategori ve ürün servislerini temsil eder.
         private readonly ICategoryService _categoryService;
         private readonly IProductService _productService;
@@ -97,6 +100,25 @@ namespace SignalR.WebAPI.Hubs
         {
             var menuTableList = _menuTableService.GetAll();
             await Clients.All.SendAsync("ReceiveMenuTableList", menuTableList);
+        }
+
+        public async Task SendMessage(string user,string message)
+        {
+            await Clients.All.SendAsync("ReceiveMessage",user,message); 
+        }
+
+        public override async Task OnConnectedAsync()
+        {
+            ClientCount++;
+            await Clients.All.SendAsync("ReceiveClientCount", ClientCount);
+            await base.OnConnectedAsync();
+        }
+
+        public override async Task OnDisconnectedAsync(Exception? exception)
+        {
+            ClientCount--;
+            await Clients.All.SendAsync("ReceiveClientCount", ClientCount);
+            await base.OnDisconnectedAsync(exception);
         }
     }
 }

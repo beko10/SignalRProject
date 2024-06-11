@@ -9,5 +9,7 @@ namespace SignalR.BusinessLayer.Abstract
 {
     public interface IBookingService:IGenericService<Booking>
     {
+        public void BookingStatusApproved(int id);
+        public void BookingStatusCancelled(int id);
     }
 }

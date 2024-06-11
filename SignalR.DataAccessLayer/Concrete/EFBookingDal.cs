@@ -14,5 +14,25 @@ namespace SignalR.DataAccessLayer.Concrete
         public EFBookingDal(SignalRContex contex) : base(contex)
         {
         }
+
+        public void BookingStatusApproved(int id)
+        {
+            using (var context = new SignalRContex())
+            {
+                var value = context.Bookings.Find(id);
+                value.Description = "Rezervasyon Onaylandı";
+                context.SaveChanges();
+            }
+        }
+
+        public void BookingStatusCancelled(int id)
+        {
+            using (var context = new SignalRContex())
+            {
+                var value = context.Bookings.Find(id);
+                value.Description = "Rezervasyon İptal Edildi";
+                context.SaveChanges();
+            }
+        }
     }
 }

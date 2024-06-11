@@ -9,5 +9,7 @@ namespace SignalR.DataAccessLayer.Abstract
 {
     public interface IBookingDal:IEntityRepository<Booking>
     {
+        void BookingStatusApproved(int id);
+        void BookingStatusCancelled(int id);
     }
 }

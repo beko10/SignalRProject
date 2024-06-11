@@ -9,5 +9,7 @@ namespace SignalR.DataAccessLayer.Abstract
 {
     public interface IDiscountDal:IEntityRepository<Discount>
     {
-    }
+        void ChangeStatusToTrue(int id);
+		void ChangeStatusToFalse(int id);
+	}
 }

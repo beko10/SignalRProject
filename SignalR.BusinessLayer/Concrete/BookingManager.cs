@@ -24,6 +24,16 @@ namespace SignalR.BusinessLayer.Concrete
             _bookingDal.Add(entity);
         }
 
+        public void BookingStatusApproved(int id)
+        {
+            _bookingDal.BookingStatusApproved(id);
+        }
+
+        public void BookingStatusCancelled(int id)
+        {
+            _bookingDal.BookingStatusCancelled(id);
+        }
+
         public void Delete(Booking entity)
         {
             _bookingDal.Delete(entity);

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SignalR.WebUI.Dtos.DiscountDto;
 using System.Text;
 
@@ -87,5 +88,20 @@ namespace SignalR.WebUI.Controllers
             return View();
 
         }
-    }
+
+        [HttpGet]
+		public async Task<IActionResult> ChangeStatusToTrue(int id)
+		{
+			var client = _httpClientFactory.CreateClient();
+			await client.GetAsync($"https://localhost:44331/api/Discount/ChangeStatusToTrue/{id}");
+			return RedirectToAction("Index");
+		}
+		[HttpGet]
+		public async Task<IActionResult> ChangeStatusToFalse(int id)
+		{
+			var client = _httpClientFactory.CreateClient();
+			await client.GetAsync($"https://localhost:44331/api/Discount/ChangeStatusToFalse/{id}");
+			return RedirectToAction("Index");
+		}
+	}
 }

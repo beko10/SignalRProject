@@ -24,7 +24,17 @@ namespace SignalR.BusinessLayer.Concrete
             _discountDal.Add(entity);
         }
 
-        public void Delete(Discount entity)
+		public void ChangeStatusToFalse(int id)
+		{
+			_discountDal.ChangeStatusToFalse(id);
+		}
+
+		public void ChangeStatusToTrue(int id)
+		{
+			_discountDal.ChangeStatusToTrue(id);
+		}
+
+		public void Delete(Discount entity)
         {
             _discountDal.Delete(entity);
         }

@@ -14,5 +14,25 @@ namespace SignalR.DataAccessLayer.Concrete
         public EfDiscountDal(SignalRContex contex) : base(contex)
         {
         }
-    }
+
+		public void ChangeStatusToFalse(int id)
+		{
+			using (var context = new SignalRContex())
+			{
+				var value = context.Discounts.Find(id);
+				value.Status = false;
+				context.SaveChanges();
+			}
+		}
+
+		public void ChangeStatusToTrue(int id)
+		{
+			using (var context = new SignalRContex())
+			{
+				var value = context.Discounts.Find(id);
+				value.Status = true;	
+				context.SaveChanges();	
+			}
+		}
+	}
 }
